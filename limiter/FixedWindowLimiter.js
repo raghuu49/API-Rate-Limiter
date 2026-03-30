@@ -1,13 +1,14 @@
+import { config } from "../config/config"
 
-const fixed_window_size=5
-const fixed_window_limit=5
+const fixed_window_size=config.FixedWindow.windowSize
+const fixed_window_limit=config.FixedWindow.limit
 
 const request_map=new Map()
 
 
 // console.log(request_map.keys().next().value)
 
-function fixedWindow(request){
+export function FixedWindow(request){
     //{user_id,request_id,timestamp}
     let user_id=request.user_id
     let timestamp=request.timestamp
@@ -24,6 +25,7 @@ function fixedWindow(request){
             start_time=Math.floor(timestamp/fixed_window_size)*fixed_window_size
             count=1
             console.log('Request Accepted')
+            return true
         }
 
         else{
@@ -33,9 +35,11 @@ function fixedWindow(request){
         if(count<fixed_window_limit){
             count+=1
             console.log("Request accepted")
+            return true
         }
         else{
             console.error("Request Limit Reached")
+            return false
 
         }
     }
@@ -44,6 +48,7 @@ function fixedWindow(request){
         count=1
         start_time=Math.floor(timestamp/fixed_window_size)*fixed_window_size
         console.log("Request Accepted")
+        return true
     }
 }
 console.log(
@@ -52,17 +57,19 @@ console.log(
 request_map.set(user_id,{start_time,count})
 }
 
-fixedWindow({user_id:1,timestamp:1})
-fixedWindow({user_id:1,timestamp:1.1})
-fixedWindow({user_id:1,timestamp:1.2})
-fixedWindow({user_id:1,timestamp:1.3})
-fixedWindow({user_id:1,timestamp:1.3})
-fixedWindow({user_id:1,timestamp:1.5})
-fixedWindow({user_id:2,timestamp:1})
-fixedWindow({user_id:1,timestamp:1})
-fixedWindow({user_id:2,timestamp:1.1})
-fixedWindow({user_id:2,timestamp:1.2})
-fixedWindow({user_id:2,timestamp:1.3})
-fixedWindow({user_id:2,timestamp:1.4})
-fixedWindow({user_id:2,timestamp:1.5})
-fixedWindow({user_id:'a',timestamp:1})
+FixedWindow({user_id:1,timestamp:1})
+FixedWindow({user_id:1,timestamp:1.1})
+FixedWindow({user_id:1,timestamp:1.2})
+FixedWindow({user_id:1,timestamp:1.3})
+FixedWindow({user_id:1,timestamp:1.3})
+FixedWindow({user_id:1,timestamp:1.5})
+FixedWindow({user_id:2,timestamp:1})
+FixedWindow({user_id:1,timestamp:1})
+FixedWindow({user_id:2,timestamp:1.1})
+FixedWindow({user_id:2,timestamp:1.2})
+FixedWindow({user_id:2,timestamp:1.3})
+FixedWindow({user_id:2,timestamp:1.4})
+FixedWindow({user_id:2,timestamp:1.5})
+FixedWindow({user_id:'a',timestamp:1})
+
+export {FixedWindow}

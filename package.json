@@ -1,0 +1,29 @@
+{
+  "name": "api-rate-limiter",
+  "version": "1.0.0",
+  "description": "A robust API rate limiting solution that controls request frequency to prevent abuse and ensure fair resource allocation.",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js",
+    "dev": "nodemon main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raghuu49/API-Rate-Limiter.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raghuu49/API-Rate-Limiter/issues"
+  },
+  "homepage": "https://github.com/raghuu49/API-Rate-Limiter#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

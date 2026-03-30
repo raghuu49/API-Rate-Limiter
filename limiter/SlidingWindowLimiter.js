@@ -1,3 +1,5 @@
+import { config } from "../config/config"
+
 class Queue{
     constructor(){
         this.items=[]
@@ -19,11 +21,11 @@ class Queue{
     }
 }
 
-const fixed_window_size=5
-const fixed_window_limit=5
+const fixed_window_size=config.SlidingWindow.windowSize
+const fixed_window_limit=config.SlidingWindow.limit
 const request_map=new Map()
 
-function SlidingWindow(request){
+export function SlidingWindow(request){
    let user_id=request.user_id
    let timestamp=request.timestamp
 
@@ -38,16 +40,14 @@ function SlidingWindow(request){
     if(request_queue.size()<fixed_window_limit) {
         request_queue.enqueue(timestamp)
         console.log("Request Accepted")
+        return true
     }
+   
     else{
         console.log("Request Rejected")
+        return false
     }
-
-    console.log(
-  `User ${user_id} | Queue: [${request_queue.items.join(", ")}]`
-)
-
-    
+  
 }
 
 SlidingWindow({user_id:1,timestamp:1})
@@ -64,3 +64,5 @@ SlidingWindow({user_id:2,timestamp:1.3})
 SlidingWindow({user_id:2,timestamp:1.4})
 SlidingWindow({user_id:2,timestamp:1.5})
 SlidingWindow({user_id:'a',timestamp:1})
+
+export {SlidingWindow}
