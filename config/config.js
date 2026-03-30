@@ -3,6 +3,8 @@
 export const config={
     algorithm:"TokenBucket", //"FixedWindow" | "SlidingWindow"
 
+    debug:true,
+
     FixedWindow: {
         windowSize:5,
         limit:5
