@@ -7,6 +7,11 @@ const PORT = 3000
 
 app.use(express.json())
 
+app.use((err, req, res, next) => {
+    console.error("Body parse error:", err.message)
+    res.status(400).json({ error: "Invalid JSON format" })
+})
+
 app.post('/limiter', rateLimiterMiddleware, (req, res) => {
     res.status(200).json({
         message: "API Call successful",
